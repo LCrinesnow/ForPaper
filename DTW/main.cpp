@@ -565,7 +565,7 @@ int main(  int argc , char *argv[] )
     char * array = new char[array_size]; // allocating an array of 1kb
     int position = 0; //this will be used incremently to fill characters in the array
     
-    ifstream fin("/Users/rinesnow/Github/DTW/DTW/DTW/FirstSymbol.txt");
+    ifstream fin("/Users/rinesnow/Github/DTW/DTW/FirstSymbol.txt");
     //opening an input stream for file test.txt
     /*checking whether file could be opened or not. If file does not exist or don't have read permissions, file
      stream could not be opened.*/
@@ -795,7 +795,7 @@ int main(  int argc , char *argv[] )
     
     for (int outter=0; outter<actualen; outter++) {
         
-        fp = fopen("/Users/rinesnow/Github/DTW/DTW/DTW/First.txt","r");//若想变成输入式参考上边代码
+        fp = fopen("/Users/rinesnow/Github/DTW/DTW/First.txt","r");//若想变成输入式参考上边代码
         if( fp == NULL )
             error(2);
 
@@ -890,7 +890,7 @@ int main(  int argc , char *argv[] )
         int it=0, ep=0, k=0;
         long long I;    /// the starting index of the data in current chunk of size EPOCH
         
-        fp1 = fopen("/Users/rinesnow/Github/DTW/DTW/DTW/First.txt","r");//若想变成输入式参考上边代码
+        fp1 = fopen("/Users/rinesnow/Github/DTW/DTW/First.txt","r");//若想变成输入式参考上边代码
         if( fp1 == NULL )
             error(2);
         
