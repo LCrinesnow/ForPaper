@@ -581,7 +581,6 @@ int main(  int argc , char *argv[] )
             position++;
             
         }
-        
         array[position-1] = '\0'; //placing character array terminating character
         
         cout << "Displaying Array..." << endl << endl;
@@ -595,7 +594,7 @@ int main(  int argc , char *argv[] )
     {
         cout << "File could not be opened." << endl;
     }
-    cout<<position<<endl;
+    cout<<"abc"<<endl;
     //以每三个char为一行
     //   string *wordarray =new string[array_size/3];
     int jj=0;
@@ -614,20 +613,21 @@ int main(  int argc , char *argv[] )
     cout<<jj<<endl;
     int actualen=jj-1;//wordarray中实际数组的大小
     cout<<actualen<<endl;
-    sax[jj].word[0]='E';
+    sax[actualen].word[0]='E';
     
     /*********************************
      二维数组编写结束
      下面将二维数组录入Trie中
      *********************************/
-    Trie *temp;
+//    Trie *temp;
     Trie *saxtemp;
-    temp=NewTrie();
+//    temp=NewTrie();
     saxtemp=NewTrie();
     int kk=0;
     while (sax[kk].word[0]!='E') {
-        Insert(saxtemp, sax[kk].word, 3, kk,sax);
+        Insert(saxtemp, sax[kk].word,3,kk,sax);
         kk++;
+        cout<<"kk:"<<kk<<endl;
     }
     /********************************
      sax根据count 由小到大排序
@@ -649,6 +649,21 @@ int main(  int argc , char *argv[] )
     int BSFL;
     for (int P=0; P<actualen;P++) {
         NND=99999;
+        //sax[P].index*compressionrate*3
+        // 不能用因为Q不是具体的数据点      for (int Q; Q<actualen; Q++) {
+        //           if(abs(P)-abs(Q)>1)
+        //               if (distance(<#_InputIter __first#>, <#_InputIter __last#>)<BSFD) {
+        //                   break;
+        //                 }
+        //               else if(distance(<#_InputIter __first#>, <#_InputIter __last#>)<NND)
+        //                    NND=distance(<#_InputIter __first#>, <#_InputIter __last#>);
+        //        }
+        /*   if (NND>BSFD) {
+         BSFD=NND;
+         BSFL=P;
+         }
+         }
+         cout<<"result:"<<BSFL<<endl;*/
     }
     /**********
      test
@@ -671,8 +686,8 @@ int main(  int argc , char *argv[] )
     
     
     double d;
-    long long i,j;
-    double ex,ex2,mean,std;
+    long long i , j;
+    double ex , ex2 , mean, std;
     int m=-1, r=-1;
     long long loc = 0;
     double t1,t2;
@@ -791,14 +806,13 @@ int main(  int argc , char *argv[] )
     
     DL disloc[actualen];
     
-    cout<<"q+orign-1:"<<orign-1<<endl;
     
     for (int outter=0; outter<actualen; outter++) {
         
         fp = fopen("/Users/rinesnow/Github/DTW/DTW/First.txt","r");//若想变成输入式参考上边代码
         if( fp == NULL )
             error(2);
-
+        
         int countifall=0;
         /// Read query file
         bsf = INF;
@@ -806,28 +820,27 @@ int main(  int argc , char *argv[] )
         j = 0;
         ex = ex2 = 0;
         
-        
         orign=sax[outter].index*compressionrate*3;
         i=0;
         int w=0;
         //如果文件太大就无法通过将所有数据都放进内存而必须跟buffer2一样
         while(fscanf(fp,"%lf",&d) != EOF)
         {
-//            q[i]=d;
-//            if(orign+m>)
+            //            q[i]=d;
+            //            if(orign+m>)
             if ((i>orign-2)&&(i<orign+m)){
                 buffer1[w]= d;
-//              cout<<d<<endl;
+                //              cout<<d<<endl;
                 w++;
             }
             i++;
         }
-    
- 
-//        memmove(buffer1,q+orign-1,m*sizeof(double));
-                cout<<"q+orign-1:"<<orign-1<<endl;
-    cout<<"原始序列"<<orign<<" "<<buffer1[0]<<buffer1[1]<<buffer1[2]<<buffer1[77]<<buffer1[78]<<buffer1[79]<<endl;
-    
+        
+        
+        //        memmove(buffer1,q+orign-1,m*sizeof(double));
+        cout<<"q+orign-1:"<<orign-1<<endl;
+        cout<<"原始序列"<<orign<<" "<<buffer1[0]<<buffer1[1]<<buffer1[2]<<buffer1[77]<<buffer1[78]<<buffer1[79]<<endl;
+        
         //        free(q);
         fclose(fp);
         //如果文件太大就无法通过将所有数据都放进内存而必须跟buffer2一样
@@ -835,8 +848,8 @@ int main(  int argc , char *argv[] )
         while(i<m)
         {
             d = buffer1[i];
-                        cout<<i<<" ";
-                        cout<<buffer1[i]<<endl;
+            cout<<i<<" ";
+            cout<<buffer1[i]<<endl;
             
             ex += d;
             ex2 += d*d;
@@ -906,7 +919,7 @@ int main(  int argc , char *argv[] )
                     
                     if (fscanf(fp1,"%lf",&d)!= EOF){
                         buffer2[k] = d;
-
+                        
                     }
                 }
                 //                cout<<"序列完毕"<<buffer2[k-1]<<buffer2[k]<<endl;
@@ -944,53 +957,53 @@ int main(  int argc , char *argv[] )
                 /// Do main task here..
                 //                cout<<"轮数："<<it<<endl;
                 
-
+                
                 ex=0; ex2=0;
                 for(i=0;i<ep;i++)//ep= 整个datafile的长度<EPOCH
                 {
                     frontbound=loc2i(orign,it,m,EPOCH)-m-m;
                     backbound=loc2i(orign,it,m,EPOCH)+m-m;
                     
-//                    cout<<"backbound"<<backbound<<endl;
-
+                    //                    cout<<"backbound"<<backbound<<endl;
+                    
                     /// A bunch of data has been read and pick one of them at a time to use
                     d = buffer2[i];
-//                    cout<<"it:"<<it;
-//                    cout<<" i1:"<<loc2i(orign,it,m,EPOCH)-m-m<<" i2:"<<loc2i(orign,it,m,EPOCH)+m-m;
-//                    cout<<" loc:"<<(it)*(EPOCH-m+1)+i-m+1;
-//                    cout<<" d: "<<d<<endl;
-                   
-                        if((it==loc2it(orign, m, EPOCH))&&(i>=frontbound)&&(i<=backbound))//LC实现｜p－q｜>=n
-                        {
-                            if(backbound-ep>0)
-                                ifoverwhelm=true;
-                            exceptionbackbound=backbound;
-//                            if(countifall<=2*m){
-                                countifall++;
-                                // 用1021-999+1=21   160-139=21
-//                                cout<<"跳跳it:"<<it;
-//                                cout<<" i1:"<<frontbound<<" i2:"<<backbound;
-//                                cout<<" loc:"<<(it)*(EPOCH-m+1)+i-m+1;
-//                                cout<<" d: "<<d;
-//                                cout<<" count:"<<countifall<<endl;
-                                continue;
-//                            }
-                        }
+                    //                    cout<<"it:"<<it;
+                    //                    cout<<" i1:"<<loc2i(orign,it,m,EPOCH)-m-m<<" i2:"<<loc2i(orign,it,m,EPOCH)+m-m;
+                    //                    cout<<" loc:"<<(it)*(EPOCH-m+1)+i-m+1;
+                    //                    cout<<" d: "<<d<<endl;
                     
-                        if (it==(loc2it(orign,m,EPOCH)+1)&&(ifoverwhelm==true)&&(countifall<2*m))
-                        {
-                            if ((i>=m-1)&&(i<=exceptionbackbound-EPOCH+m-1)){
-                                countifall++;
-                                // 用1021-999+1=21   160-139=21
-//                                cout<<"1000后it:"<<it;
-//                                cout<<" i1:"<<frontbound<<" i2:"<<backbound;
-//                                cout<<" loc:"<<(it)*(EPOCH-m+1)+i-m+1;
-//                                cout<<" d: "<<d;
-//                                cout<<" count:"<<countifall<<endl;
-                                continue;
-                            }
+                    if((it==loc2it(orign, m, EPOCH))&&(i>=frontbound)&&(i<=backbound))//LC实现｜p－q｜>=n
+                    {
+                        if(backbound-ep>0)
+                            ifoverwhelm=true;
+                        exceptionbackbound=backbound;
+                        //                            if(countifall<=2*m){
+                        countifall++;
+                        // 用1021-999+1=21   160-139=21
+                        //                                cout<<"跳跳it:"<<it;
+                        //                                cout<<" i1:"<<frontbound<<" i2:"<<backbound;
+                        //                                cout<<" loc:"<<(it)*(EPOCH-m+1)+i-m+1;
+                        //                                cout<<" d: "<<d;
+                        //                                cout<<" count:"<<countifall<<endl;
+                        continue;
+                        //                            }
+                    }
+                    
+                    if (it==(loc2it(orign,m,EPOCH)+1)&&(ifoverwhelm==true)&&(countifall<2*m))
+                    {
+                        if ((i>=m-1)&&(i<=exceptionbackbound-EPOCH+m-1)){
+                            countifall++;
+                            // 用1021-999+1=21   160-139=21
+                            //                                cout<<"1000后it:"<<it;
+                            //                                cout<<" i1:"<<frontbound<<" i2:"<<backbound;
+                            //                                cout<<" loc:"<<(it)*(EPOCH-m+1)+i-m+1;
+                            //                                cout<<" d: "<<d;
+                            //                                cout<<" count:"<<countifall<<endl;
+                            continue;
                         }
-
+                    }
+                    
                     
                     
                     
@@ -1008,11 +1021,11 @@ int main(  int argc , char *argv[] )
                     
                     /// Start the task when there are more than m-1 points in the current chunk
                     
-
+                    
                     if( i >= m-1 )//++
                     {
-//                        cout<<i<<endl;
-
+                        //                        cout<<i<<endl;
+                        
                         mean = ex/m;
                         std = ex2/m;
                         std = sqrt(std-mean*mean);//LC改，因为数据有负的所以不改成绝对值，不能进行下去了
@@ -1022,13 +1035,13 @@ int main(  int argc , char *argv[] )
                         I = i-(m-1);
                         /// Use a constant lower bound to prune the obvious subsequence
                         lb_kim = lb_kim_hierarchy(t, buffer1, j, m, mean, std, bsf);
-//                        cout<<"lbkim:"<<lb_kim<<endl;
+                        //                        cout<<"lbkim:"<<lb_kim<<endl;
                         if (lb_kim < bsf)
                         {
                             /// Use a linear time lower bound to prune; z_normalization of t will be computed on the fly.
                             /// uo, lo are envelop of the query.
                             lb_k = lb_keogh_cumulative(order, t, uo, lo, cb1, j, m, mean, std, bsf);
-//                            cout<<"lbkim:"<<lb_k<<endl;
+                            //                            cout<<"lbkim:"<<lb_k<<endl;
                             if (lb_k < bsf)
                             {
                                 /// Take another linear time to compute z_normalization of t.
@@ -1036,7 +1049,7 @@ int main(  int argc , char *argv[] )
                                 for(k=0;k<m;k++)
                                 {
                                     tz[k] = (t[(k+j)] - mean)/std;
-//                                    cout<<tz[k];
+                                    //                                    cout<<tz[k];
                                 }
                                 
                                 /// Use another lb_keogh to prune
@@ -1062,15 +1075,15 @@ int main(  int argc , char *argv[] )
                                     
                                     /// Compute DTW and early abandoning if possible
                                     dist = dtw(tz, buffer1, cb, m, r, bsf);
-//                                    cout<<"dist:"<<dist<<endl;
-
+                                    //                                    cout<<"dist:"<<dist<<endl;
+                                    
                                     if( dist < bsf )
                                     {   /// Update bsf
                                         /// loc is the real starting location of the nearest neighbor in the file
                                         bsf = dist;
                                         loc = (it)*(EPOCH-m+1) + i-m+1;
-//                                                                            cout<<"loc:::"<<loc<<" ";
-//                                                                            cout<<dist<<endl;
+                                        //                                                                            cout<<"loc:::"<<loc<<" ";
+                                        //                                                                            cout<<dist<<endl;
                                         
                                     }
                                 } else
@@ -1101,7 +1114,7 @@ int main(  int argc , char *argv[] )
         disloc[outter].loc=orign;
         
     }
-
+    
     free(u);
     free(l);
     free(uo);
@@ -1121,26 +1134,26 @@ int main(  int argc , char *argv[] )
     t2 = clock();
     
     for (int test=0; test<actualen; test++) {
-                if(disloc[test].distance>1.5)
-        cout<<disloc[test].distance<<" "<<disloc[test].loc<<endl;
+        if(disloc[test].distance>1.5)
+            cout<<disloc[test].distance<<" "<<disloc[test].loc<<endl;
     }
-
+    
     
     printf("\n");
     
     
     /// Note that loc and i are long long.
-//    cout << "Location : " << loc << endl;
-//    cout << "Distance : " << sqrt(bsf) << endl;
-//    cout << "Data Scanned : " << i << endl;
-//    cout << "Total Execution Time : " << (t2-t1)/CLOCKS_PER_SEC << " sec" << endl;
+    cout << "Location : " << loc << endl;
+    cout << "Distance : " << sqrt(bsf) << endl;
+    cout << "Data Scanned : " << i << endl;
+    cout << "Total Execution Time : " << (t2-t1)/CLOCKS_PER_SEC << " sec" << endl;
     
     /// printf is just easier for formating ;)
-//    printf("\n");
-//    printf("Pruned by LB_Kim    : %6.2f%%\n", ((double) kim / i)*100);
-//    printf("Pruned by LB_Keogh  : %6.2f%%\n", ((double) keogh / i)*100);
-//    printf("Pruned by LB_Keogh2 : %6.2f%%\n", ((double) keogh2 / i)*100);
-//    printf("DTW Calculation     : %6.2f%%\n", 100-(((double)kim+keogh+keogh2)/i*100));
+    printf("\n");
+    printf("Pruned by LB_Kim    : %6.2f%%\n", ((double) kim / i)*100);
+    printf("Pruned by LB_Keogh  : %6.2f%%\n", ((double) keogh / i)*100);
+    printf("Pruned by LB_Keogh2 : %6.2f%%\n", ((double) keogh2 / i)*100);
+    printf("DTW Calculation     : %6.2f%%\n", 100-(((double)kim+keogh+keogh2)/i*100));
     return 0;
     
 }
